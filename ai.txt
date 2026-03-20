@@ -1,0 +1,11 @@
+I used chatGPT mainly to help me get started or guide me to create a feature that I want.
+For instance, for the HTML and CSS, I use chatGPT to help me get started with the base.html.
+From there, I further improved it to create the index.html and results.html. I also used
+a little bit of chatGPT for unpacking data in results.html. As for the CSS, I used chatGPT
+to help me understand the variables such as margin and padding. From there, I experimented and played
+with it on my own to get a visual website that I want. 
+
+As for the app.py, I didn't use chatGPT that much. All I did was ask for its help to show me the logic
+of calculating dates, since that can be pretty confusing. Also, I used chatGPT to make sure that 
+my functions are correct and they work together properly to achieve the logic I desire. 
+

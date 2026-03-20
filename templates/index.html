@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="tb-card">
+  <h2>Plan your trip</h2>
+  <p class="tb-intro">
+    Planning on your next trip? Let Travel Buddy assist you! Just tell us your destination and trip style, 
+    we'll make the checklist for you!
+  </p>
+
+  <form class="tb-form" method="post" action="{{ url_for('plan') }}">
+    <div class="tb-field">
+      <label for="destination">Destination</label>
+      <input
+        type="text"
+        id="destination"
+        name="destination"
+        placeholder="e.g., Seattle, Los Angeles, Tokyo"
+        required
+      />
+    </div>
+
+    <div class="tb-field tb-field-inline">
+      <div>
+        <label for="start-date">Start date</label>
+        <input type="date" id="start-date" name="start-date" required />
+      </div>
+      <div>
+        <label for="trip-length">Trip length (1 - 14 days)</label>
+        <input
+          type="number"
+          id="trip-length"
+          name="trip-length"
+          min="1"
+          max="14"
+          value="1"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="tb-field">
+      <label for="trip-type">Trip type</label>
+      <select id="trip-type" name="trip-type" required>
+        <option value="city" selected>City sightseeing</option>
+        <option value="outdoor">Outdoor / adventure</option>
+        <option value="business">Business trip</option>
+        <option value="family">Visiting family / friends</option>
+      </select>
+    </div>
+
+    <div class="tb-field">
+      <label for="packing-style">Packing style</label>
+      <select id="packing-style" name="packing-style" required>
+        <option value="light" selected>Light packer</option>
+        <option value="moderate">Moderate</option>
+        <option value="prepared">Over packer</option>
+      </select>
+    </div>
+
+    <button type="submit" class="tb-button">Get my personalized checklist!</button>
+  </form>
+</section>
+{% endblock %}
+

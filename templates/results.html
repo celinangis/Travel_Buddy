@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="tb-card tb-card-results">
+  <h2>Your trip at a glance</h2>
+  <p class="tb-summary">{{ trip_summary }}</p>
+  <p class="tb-summary tb-summary-secondary">{{ weather_summary }}</p>
+
+  <div class="tb-checklist">
+    {% for group_key, group_title in [
+      ('essentials', 'Essentials'),
+      ('weatherSpecific', 'Weather-specific items'),
+      ('tripSpecific', 'Trip-specific items'),
+      ('extras', 'Extras'),
+    ] %}
+      {% set items = checklist.get(group_key) or [] %}
+      {% if items %}
+        <div class="tb-checklist-group">
+          <h3 class="tb-checklist-title">{{ group_title }}</h3>
+          <div class="tb-checklist-columns" aria-hidden="true">
+            <span class="tb-checklist-col-name">Item</span>
+            <span class="tb-checklist-col-qty">Qty</span>
+          </div>
+          <ul class="tb-checklist-items">
+            {% for item in items %}
+              <li class="tb-checklist-item">
+                <input type="checkbox" id="{{ group_key }}-{{ loop.index0 }}" />
+                <label class="tb-checklist-label" for="{{ group_key }}-{{ loop.index0 }}">{{ item.label }}</label>
+                <span class="tb-quantity"> {{ item.quantity or ""}} </span>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <a href="{{ url_for('index') }}" class="tb-button tb-button-secondary">Plan another trip</a>
+</section>
+
+<section class="tb-card tb-card-results">
+  <h2>Daily weather</h2>
+  <p class="tb-summary tb-summary-secondary">
+    Here is a quick look at the forecast for each day of your trip.
+  </p>
+
+  <div class="tb-daily-grid">
+    {% for day in daily_weather %}
+      <div class="tb-day-card">
+        <div class="tb-day-date">{{ day.date }}</div>
+        <div class="tb-day-temps">
+          <div class="tb-day-temp">
+            <span class="tb-day-temp-label">Max</span>
+            <span class="tb-day-temp-value">{{ day.tmax }}°C</span>
+          </div>
+          <div class="tb-day-temp">
+            <span class="tb-day-temp-label">Min</span>
+            <span class="tb-day-temp-value">{{ day.tmin }}°C</span>
+          </div>
+        </div>
+        <div class="tb-day-desc">{{ day.desc }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Buddy</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <header class="tb-header">
+      <div class="tb-header-inner">
+        <h1 class="tb-logo">Travel Buddy</h1>
+      </div>
+    </header>
+
+    <main class="tb-main">
+      <div class="tb-container">
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+
+  </body>
+</html>
+
