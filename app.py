@@ -1,10 +1,12 @@
 import json
+import ssl
 from datetime import date
 from urllib.request import urlopen
 from urllib.error import URLError, HTTPError
 
+import certifi
 import openmeteo_requests
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request
 
 GEOCODING_URL = "https://geocoding-api.open-meteo.com/v1/search"
 FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
@@ -34,6 +36,7 @@ MONTHS = [
 
 app = Flask(__name__)
 openmeteo = openmeteo_requests.Client()
+SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())
 
 def leap_year(year):
     return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
@@ -267,7 +270,7 @@ def build_daily_weather(forecast, start_date, trip_length, format_fn):
 def geocode_location(name):
     url = f"{GEOCODING_URL}?name={name}&count=1&language=en&format=json"
     try:
-        with urlopen(url, timeout=10) as response:
+        with urlopen(url, timeout=10, context=SSL_CONTEXT) as response:
             data = json.loads(response.read())
     except (URLError, HTTPError):
         return None

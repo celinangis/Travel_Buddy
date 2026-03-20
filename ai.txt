@@ -9,3 +9,9 @@ As for the app.py, I didn't use chatGPT that much. All I did was ask for its hel
 of calculating dates, since that can be pretty confusing. Also, I used chatGPT to make sure that 
 my functions are correct and they work together properly to achieve the logic I desire. 
 
+Finally, I noticed that there is an HTTP server which made the HTTP routing process of my website unclear.
+To be specific, the plan page wouldn't load. I used chatGPT to help me debug this. Basically,
+we concluded that this is because the call to the geocode_location API has an issue due to my device
+being uncertified. Therefore, by adding certifi, I ensured that the call to that API is certified, 
+guarenteeing a response back. 
+
